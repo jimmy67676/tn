@@ -1,0 +1,12 @@
+build:
+  image: python:3.9
+
+deploy:
+  before:
+    - pip install -r requirements.txt
+
+release:
+  command: python manage.py migrate --noinput && python manage.py collectstatic --noinput
+
+run:
+  command: gunicorn your_project_name.wsgi
